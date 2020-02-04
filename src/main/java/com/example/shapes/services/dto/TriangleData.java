@@ -5,8 +5,7 @@
  */
 package com.example.shapes.services.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.Arrays;
 /**
  *
  * @author janschnegotzki
@@ -15,15 +14,21 @@ public class TriangleData extends ShapeData{
 	
 	private Double alpha;
 	private Double beta;
-	private Double gamma;
+	private Double base;
 	
-	@Override
-	public Requirements getRequirements() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public TriangleData(Double alpha, Double beta, Double base){
+		this.alpha = alpha;
+		this.beta = beta;
+		this.base = base;
 	}
 
+	public TriangleData(){
+		this(60.0, 60.0, 1.0);
+	}
+
+
 	@Override
-	public Double getArea() {
+	public Double computeArea() {
 		return 1.0;
 	}
 }

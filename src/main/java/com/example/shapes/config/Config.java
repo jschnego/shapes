@@ -8,7 +8,7 @@ package com.example.shapes.config;
 import com.example.shapes.services.dto.CircleData;
 import com.example.shapes.services.dto.EllipseData;
 import com.example.shapes.services.dto.KiteData;
-import com.example.shapes.services.dto.QuadrilateralData;
+import com.example.shapes.services.dto.ParallelogramData;
 import com.example.shapes.services.dto.RectangleData;
 import com.example.shapes.services.dto.RhombusData;
 import com.example.shapes.services.dto.ShapeRegistry;
@@ -29,8 +29,7 @@ public class Config {
 	public ShapeRegistry registry(){
 		ShapeRegistry registry = new ShapeRegistry();
 		registry.addShape("triangle", new TriangleData());
-		registry.addShape("quadrilateral", new QuadrilateralData());
-		registry.addShape("parallelogram", nÏew ParallelogramData());
+		registry.addShape("parallelogram", new ParallelogramData());
 		registry.addShape("rectangle", new RectangleData());
 		registry.addShape("square", new SquareData());
 		registry.addShape("rhombus", new RhombusData());
@@ -38,7 +37,6 @@ public class Config {
 		registry.addShape("trapezium", new TrapeziumData());
 		registry.addShape("ellipse", new EllipseData());
 		registry.addShape("circle", new CircleData());
-		
 		return registry;
 	}
 }

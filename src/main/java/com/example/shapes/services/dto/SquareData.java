@@ -5,6 +5,8 @@
  */
 package com.example.shapes.services.dto;
 
+import java.util.Arrays;
+
 /**
  *
  * @author janschnegotzki
@@ -14,4 +16,6 @@ public class SquareData extends RectangleData{
 	public SquareData(Double sideLength){
 		super(sideLength, sideLength);
 	}
+
+	public SquareData(){}
 }

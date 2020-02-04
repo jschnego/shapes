@@ -5,31 +5,29 @@
  */
 package com.example.shapes.services.dto;
 
+import java.util.Arrays;
+
 /**
  *
  * @author janschnegotzki
  */
 public class EllipseData extends ShapeData{
 
-	private Double scalingX;
-	private Double scalingY;
-	private Double radius;
+	private Double radiusX;
+	private Double radiusY;
 	
-	public EllipseData(Double scalingX, Double scalingY, Double radius){
-		this.scalingX = scalingX;
-		this.scalingY = scalingY;
-		this.radius = radius;
+	public EllipseData(Double radiusX, Double radiusY){
+		this.radiusX = radiusX;
+		this.radiusY = radiusY;
 	}
 
+	public EllipseData(){
+		this(3.0, 2.0);
+	}
 	
 	@Override
-	public Requirements getRequirements() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	@Override
-	public Double getArea() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public Double computeArea() {
+		return 1.0;
 	}
 	
 }
