@@ -14,17 +14,17 @@ import java.util.Map;
  */
 public class ShapeRegistry {
 	
-	private Map<String, ShapeData> shapes = new HashMap<String, ShapeData>();
+	private Map<String, Shape> shapes = new HashMap<String, Shape>();
 
-	public void addShape(String name, ShapeData shape){
+	public void addShape(String name, Shape shape){
 	this.shapes.put(name, shape);
 	}
 
-	public ShapeData getShape(String name){
+	public Shape getShape(String name){
 		return this.shapes.get(name);
 	}
 
-	public Map<String,ShapeData> getShapes(){
+	public Map<String,Shape> getShapes(){
 		return this.shapes;
 	}
 

@@ -5,16 +5,16 @@
 */
 package com.example.shapes.config;
 
-import com.example.shapes.services.dto.CircleData;
-import com.example.shapes.services.dto.EllipseData;
-import com.example.shapes.services.dto.KiteData;
-import com.example.shapes.services.dto.ParallelogramData;
-import com.example.shapes.services.dto.RectangleData;
-import com.example.shapes.services.dto.RhombusData;
+import com.example.shapes.services.dto.Circle;
+import com.example.shapes.services.dto.Ellipse;
+import com.example.shapes.services.dto.Kite;
+import com.example.shapes.services.dto.Parallelogram;
+import com.example.shapes.services.dto.Rectangle;
+import com.example.shapes.services.dto.Rhombus;
 import com.example.shapes.services.dto.ShapeRegistry;
-import com.example.shapes.services.dto.SquareData;
-import com.example.shapes.services.dto.TrapeziumData;
-import com.example.shapes.services.dto.TriangleData;
+import com.example.shapes.services.dto.Square;
+import com.example.shapes.services.dto.Trapezium;
+import com.example.shapes.services.dto.Triangle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,15 +28,15 @@ public class Config {
 	@Bean
 	public ShapeRegistry registry(){
 		ShapeRegistry registry = new ShapeRegistry();
-		registry.addShape("triangle", new TriangleData());
-		registry.addShape("parallelogram", new ParallelogramData());
-		registry.addShape("rectangle", new RectangleData());
-		registry.addShape("square", new SquareData());
-		registry.addShape("rhombus", new RhombusData());
-		registry.addShape("kite", new KiteData());
-		registry.addShape("trapezium", new TrapeziumData());
-		registry.addShape("ellipse", new EllipseData());
-		registry.addShape("circle", new CircleData());
+		registry.addShape("triangle", new Triangle());
+		registry.addShape("parallelogram", new Parallelogram());
+		registry.addShape("rectangle", new Rectangle());
+		registry.addShape("square", new Square());
+		registry.addShape("rhombus", new Rhombus());
+		registry.addShape("kite", new Kite());
+		registry.addShape("trapezium", new Trapezium());
+		registry.addShape("ellipse", new Ellipse());
+		registry.addShape("circle", new Circle());
 		return registry;
 	}
 }

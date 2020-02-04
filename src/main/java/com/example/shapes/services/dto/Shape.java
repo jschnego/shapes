@@ -14,7 +14,7 @@ import java.util.List;
  * @author janschnegotzki
  */
 
-public abstract class ShapeData {
+public abstract class Shape {
 	
 	public List<String> getRequirements() {
 		List<String> args = new ArrayList<String>();

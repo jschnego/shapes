@@ -11,21 +11,13 @@ import java.util.Arrays;
  *
  * @author janschnegotzki
  */
-public class RhombusData extends ParallelogramData{
+public class Rhombus extends Parallelogram{
 	
-	private final Double sideLength;
-	private final Double angle;
-	
-	public RhombusData(Double sideLength, Double angle){
-		this.sideLength = sideLength;
-		this.angle = angle;
+	public Rhombus(Double sideLength, Double angle){
+		super(sideLength, sideLength, angle);
 	}
-	public RhombusData(){
+	public Rhombus(){
 		this(1.0, 60.0);
 	}
 	
-	@Override
-	public Double computeArea() {
-		return 1.0;
-	}
 }

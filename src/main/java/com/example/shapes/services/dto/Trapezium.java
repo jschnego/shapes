@@ -11,28 +11,28 @@ import java.util.Arrays;
  *
  * @author janschnegotzki
  */
-public class TrapeziumData extends ShapeData{
+public class Trapezium extends Shape{
 	
 	private final Double upperWidth;
 	private final Double lowerWidth;
 	private final Double leftHeight;
 	private final Double angle;
 	
-	public TrapeziumData(Double upperWidth, Double lowerWidth, Double leftHeight, Double angle){
+	public Trapezium(Double upperWidth, Double lowerWidth, Double leftHeight, Double angle){
 		this.upperWidth = upperWidth;
 		this.lowerWidth = lowerWidth;
 		this.leftHeight = leftHeight;
 		this.angle = angle;
 	}
 
-	public TrapeziumData(){
+	public Trapezium(){
 		this(2.0, 3.0, 1.0, 15.0);
 	}
 	
 	
 	@Override
 	public Double computeArea() {
-		return 1.0;
+		return 0.5 * (upperWidth + lowerWidth) * (leftHeight * Math.sin((angle * Math.PI)/180));
 	}
 	
 }

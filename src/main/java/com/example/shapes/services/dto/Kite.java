@@ -11,25 +11,24 @@ import java.util.Arrays;
  *
  * @author janschnegotzki
  */
-public class ParallelogramData extends TrapeziumData {
+public class Kite extends Shape{
 	
-	private final Double width;
-	private final Double height;
+	private final Double lengthA;
+	private final Double lengthB;
 	private final Double angle;
 	
-	public ParallelogramData(Double width, Double height, Double angle){
-		this.width = width;
-		this.height = height;
+	public Kite(Double lengthA, Double lengthB, Double angle){
+		this.lengthA = lengthA;
+		this.lengthB = lengthB;
 		this.angle = angle;
 	}
 
-	public ParallelogramData(){
-		this(3.0,2.0, 45.0);
+	public Kite(){
+		this(2.0, 3.0, 45.0);
 	}
 	
 	@Override
 	public Double computeArea() {
-		return 1.0;
+		return lengthA * lengthB * Math.sin((angle * Math.PI) / 180);
 	}
-	
 }

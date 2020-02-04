@@ -11,14 +11,14 @@ import java.util.Arrays;
  *
  * @author janschnegotzki
  */
-public class CircleData extends EllipseData{
+public class Rectangle extends Parallelogram{
 	
-	public CircleData(Double radius){
-		super(radius, radius);
+	public Rectangle(Double width, Double height){
+		super(width, height, 90.0);
 	}
-	
-	public CircleData(){
-		this(1.0);
+
+	public Rectangle(){
+		this(3.0, 2.0);
 	}
 	
 }

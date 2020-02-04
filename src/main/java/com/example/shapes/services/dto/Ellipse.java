@@ -11,23 +11,23 @@ import java.util.Arrays;
  *
  * @author janschnegotzki
  */
-public class EllipseData extends ShapeData{
+public class Ellipse extends Shape{
 
-	private Double radiusX;
-	private Double radiusY;
+	protected Double radiusX;
+	protected Double radiusY;
 	
-	public EllipseData(Double radiusX, Double radiusY){
+	public Ellipse(Double radiusX, Double radiusY){
 		this.radiusX = radiusX;
 		this.radiusY = radiusY;
 	}
 
-	public EllipseData(){
+	public Ellipse(){
 		this(3.0, 2.0);
 	}
 	
 	@Override
 	public Double computeArea() {
-		return 1.0;
+		return Math.PI * radiusX * radiusY;
 	}
 	
 }

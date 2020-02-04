@@ -11,11 +11,11 @@ import java.util.Arrays;
  *
  * @author janschnegotzki
  */
-public class SquareData extends RectangleData{
+public class Square extends Rectangle{
 	
-	public SquareData(Double sideLength){
+	public Square(Double sideLength){
 		super(sideLength, sideLength);
 	}
 
-	public SquareData(){}
+	public Square(){}
 }

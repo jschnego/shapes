@@ -10,25 +10,25 @@ import java.util.Arrays;
  *
  * @author janschnegotzki
  */
-public class TriangleData extends ShapeData{
+public class Triangle extends Shape{
 	
 	private Double alpha;
-	private Double beta;
+	private Double leftSide;
 	private Double base;
 	
-	public TriangleData(Double alpha, Double beta, Double base){
+	public Triangle(Double alpha, Double leftSide, Double base){
 		this.alpha = alpha;
-		this.beta = beta;
+		this.leftSide = leftSide;
 		this.base = base;
 	}
 
-	public TriangleData(){
+	public Triangle(){
 		this(60.0, 60.0, 1.0);
 	}
 
 
 	@Override
 	public Double computeArea() {
-		return 1.0;
+		return 0.5 * leftSide * base * Math.sin((alpha * Math.PI)/180);
 	}
 }
