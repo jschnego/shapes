@@ -39,4 +39,6 @@ public class Config {
 		registry.addShape("circle", new Circle());
 		return registry;
 	}
+
+
 }

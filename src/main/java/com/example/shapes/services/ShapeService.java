@@ -5,6 +5,9 @@
 */
 package com.example.shapes.services;
 
+import com.example.shapes.services.dto.InfoRequest;
+import com.example.shapes.services.dto.Shape;
+import com.example.shapes.services.dto.ShapeInfo;
 import com.example.shapes.services.dto.ShapeRegistry;
 import java.util.HashMap;
 import java.util.List;
@@ -38,4 +41,21 @@ public class ShapeService {
 	public List<String> getHierarchy(String shapeName){
 		return registry.getShape(shapeName).getHierarchy();
 	}
+
+	public Shape getShape(String name){
+		return registry.getShape(name);
+	}
+
+	public ShapeInfo getInfo(InfoRequest request){
+		ShapeInfo info = new ShapeInfo();
+		Shape shape = registry.getShape(request.getName()).withParameters(request.getParameters());
+
+		info.setArea(shape.computeArea());
+		info.setName(request.getName());
+		info.setHierarchy(shape.getHierarchy());
+		info.setParameters(request.getParameters());
+
+		return info;
+	}
+	
 }

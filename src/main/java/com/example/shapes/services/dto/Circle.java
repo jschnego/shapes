@@ -5,7 +5,7 @@
 */
 package com.example.shapes.services.dto;
 
-import java.util.Arrays;
+import java.util.Map;
 
 /**
  *
@@ -19,6 +19,11 @@ public class Circle extends Ellipse{
 	
 	public Circle(){
 		this(1.0);
+	}
+
+	@Override
+	public Circle withParameters(Map<String,Double> parameters){
+		return new Circle(parameters.get("radius"));
 	}
 
 }

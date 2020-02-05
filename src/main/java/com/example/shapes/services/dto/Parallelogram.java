@@ -6,6 +6,7 @@
 package com.example.shapes.services.dto;
 
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Parallelogram extends Trapezium {
 		this.height = height;
 		this.angle = angle;
 	}
-
+	
 	public Parallelogram(){
 		this(3.0,2.0, 45.0);
 	}
@@ -30,6 +31,11 @@ public class Parallelogram extends Trapezium {
 	@Override
 	public Double computeArea() {
 		return width * height;
+	}
+	
+	@Override
+	public Parallelogram withParameters(Map<String,Double> parameters){
+		return new Parallelogram(parameters.get("width"), parameters.get("height"), parameters.get("angle"));
 	}
 	
 }

@@ -6,6 +6,7 @@
 package com.example.shapes.services.dto;
 
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  *
@@ -30,5 +31,10 @@ public class Kite extends Shape{
 	@Override
 	public Double computeArea() {
 		return lengthA * lengthB * Math.sin((angle * Math.PI) / 180);
+	}
+
+		@Override
+	public Kite withParameters(Map<String,Double> parameters){
+		return new Kite(parameters.get("lengthA"), parameters.get("lengthB"), parameters.get("angle"));
 	}
 }

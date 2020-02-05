@@ -6,6 +6,7 @@
 package com.example.shapes.services.dto;
 
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  *
@@ -18,6 +19,11 @@ public class Rhombus extends Parallelogram{
 	}
 	public Rhombus(){
 		this(1.0, 60.0);
+	}
+	
+	@Override
+	public Rhombus withParameters(Map<String,Double> parameters){
+		return new Rhombus(parameters.get("sideLength"), parameters.get("angle"));
 	}
 	
 }

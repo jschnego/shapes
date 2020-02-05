@@ -5,7 +5,7 @@
  */
 package com.example.shapes.services.dto;
 
-import java.util.Arrays;
+import java.util.Map;
 
 /**
  *
@@ -28,6 +28,11 @@ public class Ellipse extends Shape{
 	@Override
 	public Double computeArea() {
 		return Math.PI * radiusX * radiusY;
+	}
+
+	@Override
+	public Ellipse withParameters(Map<String,Double> parameters){
+		return new Ellipse(parameters.get("radiusX"), parameters.get("radiusY"));
 	}
 	
 }

@@ -8,6 +8,7 @@ package com.example.shapes.services.dto;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -35,5 +36,7 @@ public abstract class Shape {
 	}
 	
 	public abstract Double computeArea();
+
+	public abstract Shape withParameters(Map<String, Double> parameters);
 	
 }

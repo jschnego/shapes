@@ -6,6 +6,7 @@
 package com.example.shapes.services.dto;
 
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  *
@@ -35,4 +36,8 @@ public class Trapezium extends Shape{
 		return 0.5 * (upperWidth + lowerWidth) * (leftHeight * Math.sin((angle * Math.PI)/180));
 	}
 	
+		@Override
+	public Trapezium withParameters(Map<String,Double> parameters){
+		return new Trapezium(parameters.get("upperWidth"), parameters.get("lowerWidth"), parameters.get("leftHeight"), parameters.get("angle"));
+	}
 }

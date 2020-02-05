@@ -6,9 +6,14 @@
 package com.example.shapes.services;
 
 import com.example.shapes.Shapes;
+import com.example.shapes.services.dto.InfoRequest;
+import com.example.shapes.services.dto.ShapeInfo;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.data.Offset;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +29,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ShapeServiceTest {
 	
 	@Autowired
-	ShapeService shapeService;
+		ShapeService shapeService;
 	
 	@Test
 	public void basicRequirementsShouldBeOutput() {
@@ -40,7 +45,7 @@ public class ShapeServiceTest {
 		assertThat(requirements.get("circle").size()).isEqualTo(1);
 		assertThat(requirements.get("kite").size()).isEqualTo(3);
 	}
-
+	
 	@Test
 	public void hierarchiesShouldBeRetrievedCorrectly(){
 		assertThat(shapeService.getHierarchy("triangle").size()).isEqualTo(2);
@@ -53,5 +58,39 @@ public class ShapeServiceTest {
 		assertThat(shapeService.getHierarchy("circle").size()).isEqualTo(3);
 		assertThat(shapeService.getHierarchy("kite").size()).isEqualTo(2);
 	}
+	
+	@Test
+	public void shapeInformationShouldBeProvided(){
+		Map<String, Double> parameters = new HashMap<>();
+		parameters.put("width", 5.0);
+		parameters.put("height", 3.0);
+		ShapeInfo info = shapeService.getInfo(new InfoRequest("rectangle", parameters));
+		
+		assertThat(info.getArea()).isEqualTo(15.0);
+		assertThat(info.getName()).isEqualTo("rectangle");
+		assertThat(info.getParameters()).isEqualTo(parameters);
+		assertThat(info.getHierarchy()).containsAll(Arrays.asList(new String[] {"Shape", "Trapezium", "Parallelogram", "Rectangle"}));
+		
+		parameters = new HashMap<>();
+		parameters.put("radius", 2.0);
+		info = shapeService.getInfo(new InfoRequest("circle", parameters));
+		
+		assertThat(info.getArea()).isCloseTo(12.566, Offset.offset(0.001));
+		assertThat(info.getName()).isEqualTo("circle");
+		assertThat(info.getParameters()).isEqualTo(parameters);
+		assertThat(info.getHierarchy()).containsAll(Arrays.asList(new String[] {"Shape", "Ellipse", "Circle"}));
+		
+		parameters = new HashMap<>();
+		parameters.put("base", 5.0);
+		parameters.put("leftSide", 7.0);
+		parameters.put("alpha", 45.0);
+		info = shapeService.getInfo(new InfoRequest("triangle", parameters));
+		
+		assertThat(info.getArea()).isCloseTo(12.374, Offset.offset(0.001));
+		assertThat(info.getName()).isEqualTo("triangle");
+		assertThat(info.getParameters()).isEqualTo(parameters);
+		assertThat(info.getHierarchy()).containsAll(Arrays.asList(new String[] {"Shape", "Triangle"}));
+	}
+	
 	
 }
