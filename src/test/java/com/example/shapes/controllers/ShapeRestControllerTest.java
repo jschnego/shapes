@@ -8,7 +8,7 @@ package com.example.shapes.controllers;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import com.example.shapes.Shapes;
-import com.example.shapes.services.dto.InfoRequest;
+import com.example.shapes.services.dto.Request;
 import com.example.shapes.services.dto.ShapeInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -62,7 +62,7 @@ public class ShapeRestControllerTest {
 		parameters.put("width", 5.0);
 		parameters.put("height", 3.0);
 
-		InfoRequest request = new InfoRequest("rectangle", parameters);
+		Request request = new Request("rectangle", parameters);
 		
 		String response = mockMvc.perform(post("/shape-info").headers(headers).content(mapper.writeValueAsString(request))).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 

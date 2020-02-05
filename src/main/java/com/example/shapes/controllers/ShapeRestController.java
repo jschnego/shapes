@@ -5,8 +5,9 @@
 */
 package com.example.shapes.controllers;
 
+import com.example.shapes.db.entities.StoredShape;
 import com.example.shapes.services.ShapeService;
-import com.example.shapes.services.dto.InfoRequest;
+import com.example.shapes.services.dto.Request;
 import com.example.shapes.services.dto.ShapeInfo;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,17 @@ public class ShapeRestController {
 	}
 	
 	@PostMapping("/shape-info")
-	public ResponseEntity<ShapeInfo> getShapeInformation(@RequestBody InfoRequest request){
+	public ResponseEntity<ShapeInfo> getShapeInformation(@RequestBody Request request){
 		return ResponseEntity.ok().body(shapeService.getInfo(request));
+	}
+
+	@PostMapping("/shapes")
+	public ResponseEntity<StoredShape> storeShape(@RequestBody Request request){
+		return ResponseEntity.ok().body(shapeService.storeShape(request));
+	}
+
+	@GetMapping("/shapes")
+	public ResponseEntity<List<StoredShape>> getShapes(){
+		return ResponseEntity.ok().body(shapeService.getShapes());
 	}
 }

@@ -6,7 +6,8 @@
 package com.example.shapes.services;
 
 import com.example.shapes.Shapes;
-import com.example.shapes.services.dto.InfoRequest;
+import com.example.shapes.db.entities.StoredShape;
+import com.example.shapes.services.dto.Request;
 import com.example.shapes.services.dto.ShapeInfo;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import org.assertj.core.data.Offset;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -64,7 +66,7 @@ public class ShapeServiceTest {
 		Map<String, Double> parameters = new HashMap<>();
 		parameters.put("width", 5.0);
 		parameters.put("height", 3.0);
-		ShapeInfo info = shapeService.getInfo(new InfoRequest("rectangle", parameters));
+		ShapeInfo info = shapeService.getInfo(new Request("rectangle", parameters));
 		
 		assertThat(info.getArea()).isEqualTo(15.0);
 		assertThat(info.getName()).isEqualTo("rectangle");
@@ -73,7 +75,7 @@ public class ShapeServiceTest {
 		
 		parameters = new HashMap<>();
 		parameters.put("radius", 2.0);
-		info = shapeService.getInfo(new InfoRequest("circle", parameters));
+		info = shapeService.getInfo(new Request("circle", parameters));
 		
 		assertThat(info.getArea()).isCloseTo(12.566, Offset.offset(0.001));
 		assertThat(info.getName()).isEqualTo("circle");
@@ -84,7 +86,7 @@ public class ShapeServiceTest {
 		parameters.put("base", 5.0);
 		parameters.put("leftSide", 7.0);
 		parameters.put("alpha", 45.0);
-		info = shapeService.getInfo(new InfoRequest("triangle", parameters));
+		info = shapeService.getInfo(new Request("triangle", parameters));
 		
 		assertThat(info.getArea()).isCloseTo(12.374, Offset.offset(0.001));
 		assertThat(info.getName()).isEqualTo("triangle");
@@ -92,5 +94,24 @@ public class ShapeServiceTest {
 		assertThat(info.getHierarchy()).containsAll(Arrays.asList(new String[] {"Shape", "Triangle"}));
 	}
 	
+	@Test
+	@Commit
+	public void shapesShouldBeStored(){
+		Request request = new Request();
+		request.setName("triangle");
+
+		Map<String, Double> parameters = new HashMap<>();
+		parameters.put("base", 5.0);
+		parameters.put("leftSide", 7.0);
+		parameters.put("alpha", 45.0);
+
+		request.setParameters(parameters);
+		StoredShape shape = shapeService.storeShape(request);
+
+		assertThat(shape.getId()).isNotNull();
+		assertThat(shape.getUuid()).isNotNull();
+		assertThat(shape.getName()).isEqualTo(request.getName());
+		assertThat(shape.getProperties()).isEqualTo(request.getParameters());
+	}
 	
 }

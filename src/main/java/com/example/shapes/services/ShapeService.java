@@ -5,13 +5,17 @@
 */
 package com.example.shapes.services;
 
-import com.example.shapes.services.dto.InfoRequest;
+import com.example.shapes.db.ShapeDao;
+import com.example.shapes.db.entities.StoredShape;
+import com.example.shapes.services.dto.Request;
 import com.example.shapes.services.dto.Shape;
 import com.example.shapes.services.dto.ShapeInfo;
 import com.example.shapes.services.dto.ShapeRegistry;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +28,12 @@ import org.springframework.stereotype.Service;
 public class ShapeService {
 	
 	private final ShapeRegistry registry;
+	private final ShapeDao shapeDao;
 	
 	@Autowired
-	public ShapeService(ShapeRegistry registry){
+	public ShapeService(ShapeRegistry registry, ShapeDao shapeDao){
 		this.registry = registry;
+		this.shapeDao = shapeDao;
 	}
 	
 	public Map<String, List<String>> getAllRequirements(){
@@ -46,7 +52,7 @@ public class ShapeService {
 		return registry.getShape(name);
 	}
 
-	public ShapeInfo getInfo(InfoRequest request){
+	public ShapeInfo getInfo(Request request){
 		ShapeInfo info = new ShapeInfo();
 		Shape shape = registry.getShape(request.getName()).withParameters(request.getParameters());
 
@@ -56,6 +62,24 @@ public class ShapeService {
 		info.setParameters(request.getParameters());
 
 		return info;
+	}
+
+	public StoredShape storeShape(Request request){
+		StoredShape shape = new StoredShape();
+
+		shape.setUuid(UUID.randomUUID().toString());
+		shape.setName(request.getName());
+		shape.setProperties(request.getParameters());
+		
+		StoredShape saved = shapeDao.save(shape);
+		saved.setId(null);
+
+		return saved;
+	
+	} 
+
+	public List<StoredShape> getShapes(){
+		return shapeDao.findAll().stream().map(shape -> {shape.setId(null); return shape;}).collect(Collectors.toList());
 	}
 	
 }

@@ -11,15 +11,15 @@ import java.util.Map;
  *
  * @author janschnegotzki
  */
-public class InfoRequest {
+public class Request {
 	
 	private String name;
 	private Map<String,Double> parameters;
 
-	public InfoRequest() {
+	public Request() {
 	}
 
-	public InfoRequest(String name, Map<String, Double> parameters) {
+	public Request(String name, Map<String, Double> parameters) {
 		this.name = name;
 		this.parameters = parameters;
 	}
