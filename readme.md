@@ -13,10 +13,10 @@ The next implementation steps would include the creation of a user service to en
 
 The API provides the following endpoints:
 
-/requirements GET   Lists all available shapes and their required parameters
-/shapes       GET   Lists all persisted shapes
-/shape-info   POST  Gets the area and the hierarchy of the shape corresponding to a provided Request object (see below)
-/shapes       POST  Persists a shape with the properties given by the posted Request object (see below)
+- /requirements GET   Lists all available shapes and their required parameters
+- /shapes       GET   Lists all persisted shapes
+- /shape-info   POST  Gets the area and the hierarchy of the shape corresponding to a provided Request object (see below)
+- /shapes       POST  Persists a shape with the properties given by the posted Request object (see below)
 
 Both endpoints that can be accessed by means of a POST request expect a Request object of the following form
 
