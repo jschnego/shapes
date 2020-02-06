@@ -39,14 +39,22 @@ public class ShapeRestController {
 	
 	@PostMapping("/shape-info")
 	public ResponseEntity<ShapeInfo> getShapeInformation(@RequestBody Request request){
-		return ResponseEntity.ok().body(shapeService.getInfo(request));
+		try{
+			return ResponseEntity.ok().body(shapeService.getInfo(request));
+		} catch(IllegalArgumentException iae){
+			return ResponseEntity.badRequest().build();
+		}
 	}
-
+	
 	@PostMapping("/shapes")
 	public ResponseEntity<StoredShape> storeShape(@RequestBody Request request){
-		return ResponseEntity.ok().body(shapeService.storeShape(request));
+		try{
+			return ResponseEntity.ok().body(shapeService.storeShape(request));
+		} catch(IllegalArgumentException iae){
+			return ResponseEntity.badRequest().build();
+		}
 	}
-
+	
 	@GetMapping("/shapes")
 	public ResponseEntity<List<StoredShape>> getShapes(){
 		return ResponseEntity.ok().body(shapeService.getShapes());

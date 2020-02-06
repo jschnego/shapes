@@ -21,6 +21,11 @@ public class Rectangle extends Parallelogram{
 	public Rectangle(){
 		this(3.0, 2.0);
 	}
+
+	@Override
+	public Double computeArea(){
+		return width * height;
+	}
 	
 	@Override
 	public Rectangle withParameters(Map<String,Double> parameters){

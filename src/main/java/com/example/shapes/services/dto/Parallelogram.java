@@ -14,9 +14,9 @@ import java.util.Map;
  */
 public class Parallelogram extends Trapezium {
 	
-	private final Double width;
-	private final Double height;
-	private final Double angle;
+	protected final Double width;
+	protected final Double height;
+	protected final Double angle;
 	
 	public Parallelogram(Double width, Double height, Double angle){
 		this.width = width;
@@ -30,7 +30,7 @@ public class Parallelogram extends Trapezium {
 	
 	@Override
 	public Double computeArea() {
-		return width * height;
+		return width * height * Math.sin((angle * Math.PI) / 180);
 	}
 	
 	@Override

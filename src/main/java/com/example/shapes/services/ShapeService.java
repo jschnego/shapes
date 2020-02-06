@@ -43,43 +43,59 @@ public class ShapeService {
 		}
 		return requirements;
 	}
-
+	
 	public List<String> getHierarchy(String shapeName){
 		return registry.getShape(shapeName).getHierarchy();
 	}
-
+	
 	public Shape getShape(String name){
 		return registry.getShape(name);
 	}
-
+	
 	public ShapeInfo getInfo(Request request){
+		if(!providesRequiredParameters(request)){
+			throw new IllegalArgumentException();
+		}
 		ShapeInfo info = new ShapeInfo();
+		
 		Shape shape = registry.getShape(request.getName()).withParameters(request.getParameters());
-
+		
 		info.setArea(shape.computeArea());
 		info.setName(request.getName());
 		info.setHierarchy(shape.getHierarchy());
 		info.setParameters(request.getParameters());
-
+		
 		return info;
 	}
-
+	
+	public Boolean providesRequiredParameters(Request request){
+		Shape shape = registry.getShape(request.getName());
+		for(String requirement : shape.getRequirements()){
+			if(request.getParameters().get(requirement) == null){
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	public StoredShape storeShape(Request request){
+		if(!providesRequiredParameters(request)){
+			throw new IllegalArgumentException();
+		}
+		
 		StoredShape shape = new StoredShape();
-
+		
 		shape.setUuid(UUID.randomUUID().toString());
 		shape.setName(request.getName());
 		shape.setProperties(request.getParameters());
 		
-		StoredShape saved = shapeDao.save(shape);
-		saved.setId(null);
-
-		return saved;
+		return shapeDao.save(shape);
+		
+	}
 	
-	} 
-
 	public List<StoredShape> getShapes(){
-		return shapeDao.findAll().stream().map(shape -> {shape.setId(null); return shape;}).collect(Collectors.toList());
+		return shapeDao.findAll();
 	}
 	
 }

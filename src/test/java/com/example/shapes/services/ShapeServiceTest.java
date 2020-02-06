@@ -13,8 +13,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.transaction.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.assertj.core.data.Offset;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes=Shapes.class)
+@Transactional
 public class ShapeServiceTest {
 	
 	@Autowired
@@ -99,19 +102,73 @@ public class ShapeServiceTest {
 	public void shapesShouldBeStored(){
 		Request request = new Request();
 		request.setName("triangle");
-
+		
 		Map<String, Double> parameters = new HashMap<>();
 		parameters.put("base", 5.0);
 		parameters.put("leftSide", 7.0);
 		parameters.put("alpha", 45.0);
-
+		
 		request.setParameters(parameters);
 		StoredShape shape = shapeService.storeShape(request);
-
-		assertThat(shape.getId()).isNotNull();
+		
 		assertThat(shape.getUuid()).isNotNull();
 		assertThat(shape.getName()).isEqualTo(request.getName());
 		assertThat(shape.getProperties()).isEqualTo(request.getParameters());
+	}
+	
+	@Test
+	public void allShapesShouldBeRetrieved(){
+		
+		Request request = new Request();
+		request.setName("triangle");
+		
+		Map<String, Double> parameters = new HashMap<>();
+		parameters.put("base", 5.0);
+		parameters.put("leftSide", 7.0);
+		parameters.put("alpha", 45.0);
+		
+		request.setParameters(parameters);
+		shapeService.storeShape(request);
+		
+		request.setName("triangle");
+		parameters.put("base", 3.5);
+		parameters.put("leftSide", 6.3);
+		parameters.put("alpha", 53.0);
+		shapeService.storeShape(request);
+		
+		request.setName("triangle");
+		parameters.put("base", 13.7);
+		parameters.put("leftSide", 9.6);
+		parameters.put("alpha", 17.9);
+		shapeService.storeShape(request);
+
+		assertThat(shapeService.getShapes().size()).isEqualTo(3);
+	}
+
+	@Test
+	public void missingParametersShouldTriggerException(){
+		Request request = new Request();
+		request.setName("circle");
+
+		Map<String, Double> parameters = new HashMap<>();
+		parameters.put("height", 5.0);
+		request.setParameters(parameters);
+		
+		try{
+			shapeService.getInfo(request);
+			fail();
+		} catch(Exception ex){
+			assertThat(ex).isInstanceOf(IllegalArgumentException.class);
+		}
+
+		try{
+			shapeService.storeShape(request);
+			fail();
+		} catch(Exception ex){
+			assertThat(ex).isInstanceOf(IllegalArgumentException.class);
+		}
+		
+		
 	}
 	
 }

@@ -22,6 +22,11 @@ public class Rhombus extends Parallelogram{
 	}
 	
 	@Override
+	public Double computeArea(){
+	return width * width * Math.sin((angle * Math.PI) / 180);	
+	}
+	
+	@Override
 	public Rhombus withParameters(Map<String,Double> parameters){
 		return new Rhombus(parameters.get("sideLength"), parameters.get("angle"));
 	}
