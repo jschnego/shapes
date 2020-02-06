@@ -1,4 +1,4 @@
-#Shapes
+# Shapes
 
 The present code implements the basic requirements of the provided test.
 Since no further indications were given regarding the GUI, it was assumed that it would be a mobile-first web application and a REST API was implemented accordingly.
